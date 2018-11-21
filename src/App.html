@@ -1,9 +1,5 @@
-<body>
-	<section class="todoapp">
-		<header class="header">
-			<h1>todos</h1>
-			<input class="new-todo" placeholder="What needs to be done?" autofocus>
-		</header>
+<section class="todoapp">
+	<Header/>
 		<!-- This section should be hidden by default and shown when there are todos -->
 		<section class="main">
 			<input id="toggle-all" class="toggle-all" type="checkbox">
@@ -48,13 +44,22 @@
 			<!-- Hidden if no completed items are left ↓ -->
 			<button class="clear-completed">Clear completed</button>
 		</footer>
-	</section>
-	<footer class="info">
-		<p>Double-click to edit a todo</p>
-		<!-- Remove the below line ↓ -->
-		<p>Template by <a href="http://sindresorhus.com">Sindre Sorhus</a></p>
-		<!-- Change this out with your name and url ↓ -->
-		<p>Created by <a href="https://github.com/serjilyashenko">Serj Ilyashenko</a></p>
-		<p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
-	</footer>
-</body>
+</section>
+<footer class="info">
+	<p>Double-click to edit a todo</p>
+	<!-- Remove the below line ↓ -->
+	<p>Template by <a href="http://sindresorhus.com">Sindre Sorhus</a></p>
+	<!-- Change this out with your name and url ↓ -->
+	<p>Created by <a href="https://github.com/serjilyashenko">Serj Ilyashenko</a></p>
+	<p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
+</footer>
+
+<script>
+		import Header from "./Header.html";
+
+		export default {
+		  components: {
+		    Header
+		  }
+		};
+</script>

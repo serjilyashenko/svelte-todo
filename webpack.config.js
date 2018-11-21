@@ -19,7 +19,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.svelte$/,
+        test: /\.html$/,
         exclude: /node_modules/,
         use: {
           loader: 'svelte-loader',

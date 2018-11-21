@@ -16,8 +16,5 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
     "start": "webpack-dev-server --content-base public"
-  },
-  "dependencies": {
-    "eslint": "^5.9.0"
   }
 }
