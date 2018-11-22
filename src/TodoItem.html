@@ -1,0 +1,43 @@
+<li class="{todo.completed ? 'completed' : ''} {editing ? 'editing' : ''}">
+	<input ref:editInput class="edit" bind:value=newValue on:blur="onEdit()" on:keydown="onKeyDown(event)">
+	<div class="view">
+		<input class="toggle" type="checkbox" checked={todo.completed} on:change="onToggle(event)" />
+		<label on:dblclick="onSetEditing()">{todo.title}</label>
+		<button on:click="fire('remove')" class="destroy"></button>
+	</div>
+</li>
+
+<script>
+  export default {
+    data() {
+      return {
+        editing: false,
+        newValue: ""
+      };
+    },
+    oncreate() {
+      const todo = this.options.data.todo;
+      this.set({ newValue: todo.title });
+    },
+    methods: {
+      onToggle(e) {
+        e.target.checked = this.options.data.todo.completed;
+        this.fire("toggle");
+      },
+      onSetEditing() {
+        this.set({ editing: true });
+        this.refs.editInput.focus();
+      },
+      onKeyDown(e) {
+        if (e.key === "Enter") {
+          this.onEdit();
+        }
+      },
+      onEdit() {
+        const { newValue } = this.get();
+        this.fire("change", { value: newValue });
+        this.set({ editing: false });
+      }
+    }
+  };
+</script>
