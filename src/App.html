@@ -2,7 +2,7 @@
   <Header on:save="newTodo(event.value)" />
   {#if todos.length}
 	<section class="main">
-		<input id="toggle-all" class="toggle-all" type="checkbox">
+		<input id="toggle-all" class="toggle-all" type="checkbox" on:change="toggleAll(event)" checked={allChecked}>
 		<label for="toggle-all">Mark all as complete</label>
 		<ul class="todo-list">
 			{#each todos as todo}
@@ -43,6 +43,9 @@
         ]
       };
     },
+    computed: {
+      allChecked: ({todos}) => todos.every(t => t.completed)
+    },
     methods: {
       newTodo(title) {
         const todos = this.get().todos;
@@ -55,6 +58,12 @@
           t => (t.id === id ? { ...t, completed: !t.completed } : t)
         );
         this.set({ todos });
+      },
+      toggleAll(e) {
+        const {todos, allChecked} = this.get();
+        e.target.checked = allChecked;
+        const completed = !allChecked;
+        this.set({todos: todos.map(t => ({ ...t, completed }))});
       },
       change(id, value) {
         const todos = this.get().todos.map(
