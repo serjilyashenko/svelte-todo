@@ -1,4 +1,32 @@
 <header class="header">
-	<h1>todos</h1>
-	<input class="new-todo" placeholder="What needs to be done?" autofocus>
+  <h1>todos</h1>
+  <input
+    class="new-todo"
+    bind:value="value"
+    on:keydown="onKeyDown(event)"
+    placeholder="What needs to be done?"
+    autofocus
+  />
 </header>
+
+<script>
+  export default {
+    data() {
+      return {
+        value: ''
+      };
+    },
+    methods: {
+      onKeyDown(e) {
+        if (e.key === 'Enter') {
+          this.onSave();
+        }
+      },
+      onSave() {
+        const value = this.get().value;
+        this.fire('save', { value });
+        this.set({ value: '' });
+      }
+    }
+  };
+</script>
