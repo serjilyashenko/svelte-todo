@@ -10,22 +10,7 @@
 		</ul>
 	</section>
 	<footer class="footer">
-		<!-- This should be `0 items left` by default -->
-		<span class="todo-count"><strong>0</strong> item left</span>
-		<!-- Remove this if you don't implement routing -->
-		<ul class="filters">
-			<li>
-				<a class="selected" href="#/">All</a>
-			</li>
-			<li>
-				<a href="#/active">Active</a>
-			</li>
-			<li>
-				<a href="#/completed">Completed</a>
-			</li>
-		</ul>
-		<!-- Hidden if no completed items are left ↓ -->
-		<button class="clear-completed">Clear completed</button>
+		<Footer {incompletedCount} {completedCount} on:removeCompleted="removeCompleted()"/>
 	</footer>
 	{/if}
 </section>
@@ -44,7 +29,9 @@
       };
     },
     computed: {
-      allChecked: ({todos}) => todos.every(t => t.completed)
+      allChecked: ({todos}) => todos.every(t => t.completed),
+      incompletedCount: ({todos}) => todos.filter(t => !t.completed).length,
+      completedCount: ({todos, incompletedCount}) => todos.length - incompletedCount
     },
     methods: {
       newTodo(title) {
@@ -74,11 +61,16 @@
       remove(id) {
         const todos = this.get().todos.filter(t => t.id !== id);
         this.set({ todos });
+      },
+      removeCompleted() {
+        const todos = this.get().todos.filter(t => !t.completed);
+        this.set({ todos });
       }
     },
     components: {
       Header: './Header.html',
       TodoItem: './TodoItem.html',
+      Footer: './Footer.html',
       Info: './Info.html'
     }
   };
