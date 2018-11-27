@@ -3,9 +3,9 @@
   <span class="todo-count"><strong>{incompletedCount}</strong> item{sEnding} left</span>
   <!-- Remove this if you don't implement routing -->
   <ul class="filters">
-    <li><a class="selected" href="#/">All</a></li>
-    <li><a href="#/active">Active</a></li>
-    <li><a href="#/completed">Completed</a></li>
+    <li><a class="selected" href="/">All</a></li>
+    <li><a href="/active">Active</a></li>
+    <li><a href="/completed">Completed</a></li>
   </ul>
   {#if completedCount} <button class="clear-completed" on:click="fire('removeCompleted')">Clear completed</button> {/if}
 </div>
