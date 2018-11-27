@@ -1,19 +1,30 @@
 <div>
-  <!-- This should be `0 items left` by default -->
   <span class="todo-count"><strong>{incompletedCount}</strong> item{sEnding} left</span>
-  <!-- Remove this if you don't implement routing -->
   <ul class="filters">
-    <li><a class="selected" href="/">All</a></li>
-    <li><a href="/active">Active</a></li>
-    <li><a href="/completed">Completed</a></li>
+    <li><NavLink path="{homePath}">All</NavLink></li>
+    <li><NavLink path="{activePath}">Active</NavLink></li>
+    <li><NavLink path="{completedPath}">Completed</NavLink></li>
   </ul>
   {#if completedCount} <button class="clear-completed" on:click="fire('removeCompleted')">Clear completed</button> {/if}
 </div>
 
 <script>
+  import routingService from './utils/routing.js';
+  import path from './utils/path.js';
+
   export default {
+    data() {
+      return {
+        homePath: path.home,
+        activePath: path.active,
+        completedPath: path.completed
+      };
+    },
     computed: {
       sEnding: ({ incompletedCount }) => (incompletedCount !== 1 ? 's' : '')
+    },
+    components: {
+      NavLink: './NavLink.html'
     }
   };
 </script>

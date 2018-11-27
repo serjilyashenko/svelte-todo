@@ -5,23 +5,37 @@
 		<input id="toggle-all" class="toggle-all" type="checkbox" on:change="toggleAll(event)" checked={allChecked}>
 		<label for="toggle-all">Mark all as complete</label>
 		<ul class="todo-list">
-			{#each todos as todo (todo.id)}
+			{#each resultTodos as todo (todo.id)}
 			<TodoItem {todo} on:remove="remove(todo.id)" on:toggle="toggle(todo.id)" on:change="change(todo.id, event.value)" /> {/each}
 		</ul>
 	</section>
 	<footer class="footer">
 		<Footer {incompletedCount} {completedCount} on:removeCompleted="removeCompleted()"/>
 	</footer>
-	{/if}
+  {/if}
 </section>
 <footer class="info">
 	<Info/>
 </footer>
 
 <script>
+  import routingService from './utils/routing.js';
+  import getFilter from './utils/getFilter.js';
+  import getFilterMethod from './utils/getFilterMethod.js';
+
   export default {
+    components: {
+      Header: './Header.html',
+      TodoItem: './TodoItem.html',
+      Footer: './Footer.html',
+      Info: './Info.html'
+    },
+    oncreate() {
+      routingService.onChange(pathname => this.set({ pathname }));
+    },
     data() {
       return {
+        pathname: routingService.pathname,
         todos: [
           { id: 0, title: 'Taste JavaScript', completed: true },
           { id: 1, title: 'Buy a unicorn', completed: false }
@@ -31,9 +45,14 @@
     computed: {
       allChecked: ({todos}) => todos.every(t => t.completed),
       incompletedCount: ({todos}) => todos.filter(t => !t.completed).length,
-      completedCount: ({todos, incompletedCount}) => todos.length - incompletedCount
+      completedCount: ({todos, incompletedCount}) => todos.length - incompletedCount,
+      filter: ({pathname}) => getFilter(pathname),
+      resultTodos: ({filter, todos}) => todos.filter(getFilterMethod(filter))
     },
     methods: {
+      moveToPath(pathname) {
+        history.push(pathname)
+      },
       newTodo(title) {
         const todos = this.get().todos;
         const id = Math.max(0, ...todos.map(t => t.id)) + 1;
@@ -66,12 +85,6 @@
         const todos = this.get().todos.filter(t => !t.completed);
         this.set({ todos });
       }
-    },
-    components: {
-      Header: './Header.html',
-      TodoItem: './TodoItem.html',
-      Footer: './Footer.html',
-      Info: './Info.html'
     }
   };
 </script>

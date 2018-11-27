@@ -1,0 +1,31 @@
+<a class:selected="pathname === path" href="/{path}" on:click="goto(event)"><slot></slot></a>
+
+<script>
+  import routingService from './utils/routing.js';
+
+  export default {
+    data() {
+      return {
+        unsubscribe: null,
+        pathname: routingService.pathname
+      };
+    },
+    oncreate() {
+      const unsubscribe = routingService.onChange(pathname => {
+        this.set({ pathname });
+      });
+      this.set({ unsubscribe });
+    },
+    ondestroy() {
+      this.get().unsubscribe();
+    },
+    methods: {
+      goto(event) {
+        event.preventDefault();
+        const pathname = this.get().path;
+        routingService.moveTo(pathname);
+        this.set({ pathname });
+      }
+    }
+  };
+</script>
