@@ -3,7 +3,7 @@
   {#if todos.length}
 	<section class="main">
 		<input id="toggle-all" class="toggle-all" type="checkbox" on:change="toggleAll(event)" checked={allChecked}>
-		<label for="toggle-all">Mark all as complete</label>
+    <label for="toggle-all">Mark all as complete</label>
 		<ul class="todo-list">
 			{#each resultTodos as todo (todo.id)}
 			<TodoItem {todo} on:remove="remove(todo.id)" on:toggle="toggle(todo.id)" on:change="change(todo.id, event.value)" /> {/each}

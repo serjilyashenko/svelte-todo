@@ -1,3 +1,4 @@
+<!-- TodoItem.html file -->
 <li class="{todo.completed ? 'completed' : ''} {editing ? 'editing' : ''}">
   <input ref:editInput class="edit" bind:value="newValue" on:blur="onEdit()" on:keydown="onKeyDown(event)" />
   <div class="view">
@@ -20,7 +21,7 @@
     },
     methods: {
       onToggle(e) {
-        e.target.checked = this.options.data.todo.completed;
+        e.target.checked = this.get().todo.completed;
         this.fire('toggle');
       },
       onSetEditing() {
