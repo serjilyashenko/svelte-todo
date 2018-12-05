@@ -16,7 +16,7 @@
       };
     },
     oncreate() {
-      const todo = this.options.data.todo;
+      const todo = this.get().todo;
       this.set({ newValue: todo.title });
     },
     methods: {
