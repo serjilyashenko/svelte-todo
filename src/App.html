@@ -10,7 +10,7 @@
 		</ul>
 	</section>
 	<footer class="footer">
-		<Footer {incompletedCount} {completedCount} on:removeCompleted="removeCompleted()"/>
+		<Footer nonCompletedCount={nonCompletedCount} {completedCount} on:removeCompleted="removeCompleted()"/>
 	</footer>
   {/if}
 </section>
@@ -44,7 +44,7 @@
     },
     computed: {
       allChecked: ({todos}) => todos.every(t => t.completed),
-      incompletedCount: ({todos}) => todos.filter(t => !t.completed).length,
+      nonCompletedCount: ({todos}) => todos.filter(t => !t.completed).length,
       completedCount: ({todos, incompletedCount}) => todos.length - incompletedCount,
       filter: ({pathname}) => getFilter(pathname),
       resultTodos: ({filter, todos}) => todos.filter(getFilterMethod(filter))

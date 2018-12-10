@@ -1,12 +1,6 @@
 <header class="header">
   <h1>todos</h1>
-  <input
-    class="new-todo"
-    bind:value="value"
-    on:keydown="onKeyDown(event)"
-    placeholder="What needs to be done?"
-    autofocus
-  />
+  <input class="new-todo" bind:value on:keydown="onKeyDown(event)" placeholder="What needs to be done?" autofocus />
 </header>
 
 <script>

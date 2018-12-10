@@ -1,5 +1,5 @@
 <div>
-  <span class="todo-count"><strong>{incompletedCount}</strong> item{sEnding} left</span>
+  <span class="todo-count"><strong>{nonCompletedCount}</strong> item{sEnding} left</span>
   <ul class="filters">
     <li><NavLink path="{homePath}">All</NavLink></li>
     <li><NavLink path="{activePath}">Active</NavLink></li>
@@ -21,7 +21,7 @@
       };
     },
     computed: {
-      sEnding: ({ incompletedCount }) => (incompletedCount !== 1 ? 's' : '')
+      sEnding: ({ nonCompletedCount }) => (nonCompletedCount !== 1 ? 's' : '')
     },
     components: {
       NavLink: './NavLink.html'
