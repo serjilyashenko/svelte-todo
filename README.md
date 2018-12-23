@@ -7,7 +7,7 @@ The repository is appears:
 
 ## Motivation
 
-The goal of the the repository and `Svelte Quick Start` article is to introduce Svelte syntax fast by creating Todo app step by step.
+The goal of the the repository and [Svelte Quick Start](https://medium.com/@serj.ilyashenko/svelte-quick-start-e26c017d2e30) article is to introduce Svelte syntax fast by creating Todo app step by step.
 Todo App uses all operations of the CRUD principle: Create, Read, Update, Delete.
 It makes a Todo App good candidate for Svelte framework introduction.
 
