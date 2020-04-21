@@ -1,4 +1,6 @@
 # Svelte Todo List
+Todo App and source for Medium article [Svelte - Quick Start](https://medium.com/@serj.ilyashenko/svelte-quick-start-e26c017d2e30)
+
 
 The repository is appears:
 
